@@ -12,7 +12,6 @@ user USERNAME do
   home "/home/#{ USERNAME }"
   manage_home true
   shell '/bin/bash'
-  password 'password'
 end
 
 # MAKE SURE THE HOME DIR HAS CORRECT OWNERSHIP
