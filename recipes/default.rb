@@ -7,7 +7,6 @@
 USERNAME = node['kioskuser']['username']
 
 # CREATE THE USER
-
 user USERNAME do
   comment 'A kiosk user'
   home "/home/#{ USERNAME }"
@@ -16,8 +15,19 @@ user USERNAME do
   password 'password'
 end
 
-# CREATE AN UPSTART CONFIG DIRECTORY
+# MAKE SURE THE HOME DIR HAS CORRECT OWNERSHIP
+directory "/home/#{ USERNAME }" do
+  group USERNAME
+  user  USERNAME
+end
 
+# MAKE SURE THE CONFIG DIR HAS CORRECT OWNERSHIP
+directory "/home/#{ USERNAME }/.config" do
+  group USERNAME
+  user  USERNAME
+end
+
+# CREATE AN UPSTART CONFIG DIRECTORY
 directory "/home/#{ USERNAME }/.config/upstart" do
   recursive true
   group     USERNAME
@@ -26,7 +36,6 @@ directory "/home/#{ USERNAME }/.config/upstart" do
 end
 
 # SET THE KIOSKUSER TO AUTOLOGIN
-
 directory "/etc/lightdm/lightdm.conf.d" do
   recursive true
   action :create
