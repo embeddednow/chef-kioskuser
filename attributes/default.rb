@@ -1,0 +1,1 @@
+default['kioskuser']['username'] = 'kioskuser'
