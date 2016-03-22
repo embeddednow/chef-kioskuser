@@ -20,7 +20,9 @@ end
 
 directory "/home/#{ USERNAME }/.config/upstart" do
   recursive true
-  action :create
+  group     USERNAME
+  user      USERNAME
+  action    :create
 end
 
 # SET THE KIOSKUSER TO AUTOLOGIN
